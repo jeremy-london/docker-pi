@@ -45,5 +45,6 @@ module.exports = {
     },
     'gatsby-transformer-remark',
     'gatsby-plugin-styled-components',
+    `gatsby-plugin-netlify`, // make sure to put last in the array
   ],
 }
