@@ -1,0 +1,17 @@
+backend:
+  name: github
+  branch: master
+  repo: jernjennlondon/LUTprogatsby2
+
+media_folder: static/img
+public_folder: /img
+
+collections:
+  - name: 'team'
+    label: 'Team'
+    folder: 'src/team'
+    create: true
+    slug: '{{slug}}'
+    fields:
+      - { label: 'Team Member', name: 'title', widget: 'string' }
+      - { label: 'bio', name: 'bio', widget: 'markdown' }
