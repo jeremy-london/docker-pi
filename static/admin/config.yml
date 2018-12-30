@@ -2,10 +2,8 @@ backend:
   name: github
   branch: master
   repo: jernjennlondon/LUTprogatsby2
-  name: git-gateway
-  accept_role:
-    - admin
-    - editor
+  auth_endpoint: auth
+  base_url: https://api.netlify.com
 
 media_folder: static/img
 public_folder: /img
