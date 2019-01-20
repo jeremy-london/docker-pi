@@ -1,9 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: "Jeremy's Blog",
-    description: 'Awesome new blog to make my first Gatsby project',
+    title: 'Docker Pi',
+    description: 'Docker Pi - RaspberryPi Docker Based Projects',
     author: 'Jeremy London',
-    siteUrl: `https://progatsby2london.netlify.com`,
+    siteUrl: `https://docker-pi.com`,
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -19,8 +19,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: `Jeremy's Level Up Blog`,
-        short_name: `J's Blog`,
+        name: `Docker Pi`,
+        short_name: `Docker Pi`,
         start_url: '/',
         background_color: '#524763',
         theme_color: '#524763',
@@ -40,6 +40,26 @@ module.exports = {
       options: {
         path: `${__dirname}/src/images`,
         name: 'images',
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: 'UA-132817533-1',
+        // Puts tracking script in the head instead of the body
+        head: false,
+        // Setting this parameter is optional
+        anonymize: true,
+        // Setting this parameter is also optional
+        respectDNT: true,
+        // Avoids sending pageview hits from custom paths
+        exclude: ['/preview/**', '/do-not-track/me/too/'],
+        // Enables Google Optimize using your container Id
+        optimizeId: 'UA-132817533-1',
+        // Any additional create only fields (optional)
+        sampleRate: 5,
+        siteSpeedSampleRate: 10,
+        cookieDomain: 'docker-pi.com/',
       },
     },
     'gatsby-transformer-remark',
