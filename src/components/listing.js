@@ -14,12 +14,28 @@ const LISTING_QUERY = graphql`
           frontmatter {
             date(formatString: "MMMM DD, YYYY")
             title
-            slug
           }
         }
       }
     }
   }
+  # query BlogPostListing {
+  #   allMarkdownRemark(
+  #     limit: 10
+  #     sort: { order: DESC, fields: [frontmatter___date] }
+  #   ) {
+  #     edges {
+  #       node {
+  #         excerpt
+  #         frontmatter {
+  #           date(formatString: "MMMM DD, YYYY")
+  #           title
+  #           slug
+  #         }
+  #       }
+  #     }
+  #   }
+  # }
 `
 
 const Post = styled.article`
@@ -52,12 +68,12 @@ const Listing = () => (
     render={({ allMarkdownRemark }) =>
       allMarkdownRemark.edges.map(({ node }) => (
         <Post key={node.frontmatter.slug}>
-          <Link to={`/posts${node.frontmatter.slug}`}>
+          <Link to={`/posts/${node.frontmatter.slug}`}>
             <h2>{node.frontmatter.title}</h2>
           </Link>
           <p>{node.frontmatter.date}</p>
           <p>{node.excerpt}</p>
-          <Link class="read-more" to={`/posts${node.frontmatter.slug}`}>
+          <Link class="read-more" to={`/posts/${node.frontmatter.slug}`}>
             Read More
           </Link>
         </Post>

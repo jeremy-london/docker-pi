@@ -1,29 +1,36 @@
 backend:
   name: github
-  repo: jeremy-london/docker-pi
+  repo: jeremy-london/docker-pi # Change this to your repo
+  branch: testing
+
+production:
+  backend:
+    name: github
+    repo: jeremy-london/docker-pi # Change this to your repo
+    branch: master
 
 media_folder: static/img
 public_folder: /img
 
+display_url: https://docker-pi.com
+
+publish_mode: editorial_workflow
+
 collections:
-  - name: 'post'
-    label: 'Post'
+  - name: 'posts'
+    label: 'Posts'
     folder: 'src/posts'
     create: true
-    slug: '/{{slug}}'
+    sort: 'date:desc'
+    slug: '{{slug}}'
     fields:
-      - {
-          label: 'Template Key',
-          name: 'templateKey',
-          widget: 'hidden',
-          default: 'blog-post',
-        }
+      - { label: 'Layout', name: 'layout', widget: 'hidden', default: 'post' }
       - { label: 'Title', name: 'title', widget: 'string' }
-      - { label: 'Slug', name: 'slug', widget: 'string' }
-      - { label: 'Publish Date', name: 'date', widget: 'date' }
-      - { label: 'Description', name: 'description', widget: 'text' }
       - { label: 'Body', name: 'body', widget: 'markdown' }
       - { label: 'Tags', name: 'tags', widget: 'list' }
+    meta:
+      - { label: 'Publish Date', name: 'date', widget: 'date' }
+      - { label: 'Description', name: 'description', widget: 'text' }
 
   - name: 'pages'
     label: 'Pages'
