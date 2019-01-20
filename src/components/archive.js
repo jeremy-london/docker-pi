@@ -5,33 +5,22 @@ import styled from 'styled-components'
 const POST_ARCHIVE_QUERY = graphql`
   query BlogPostArchive {
     allMarkdownRemark(
-      limit: 5
-      sort: { order: DESC, fields: [frontmatter___date] }
+      limit: 10 # sort: { order: DESC, fields: [frontmatter___date] }
     ) {
       edges {
         node {
+          excerpt
+          fields {
+            slug
+          }
           frontmatter {
+            # date(formatString: "MMMM DD, YYYY")
             title
           }
         }
       }
     }
   }
-  # query BlogPostArchive {
-  #   allMarkdownRemark(
-  #     limit: 5
-  #     sort: { order: DESC, fields: [frontmatter___date] }
-  #   ) {
-  #     edges {
-  #       node {
-  #         frontmatter {
-  #           title
-  #           slug
-  #         }
-  #       }
-  #     }
-  #   }
-  # }
 `
 
 const ArchiveList = styled.ul`
@@ -55,10 +44,10 @@ const Archive = () => (
         <aside>
           <h3>Archive</h3>
           <ArchiveList>
-            {allMarkdownRemark.edges.map(edge => (
-              <li key={edge.node.frontmatter.slug}>
-                <Link to={`/posts/${edge.node.frontmatter.slug}`}>
-                  {edge.node.frontmatter.title}
+            {allMarkdownRemark.edges.map(({ node }) => (
+              <li key={node.fields.slug}>
+                <Link to={`/posts/${node.fields.slug}`}>
+                  {node.frontmatter.title}
                 </Link>
               </li>
             ))}

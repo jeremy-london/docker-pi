@@ -14,20 +14,6 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    'gatsby-transformer-sharp',
-    'gatsby-plugin-sharp',
-    {
-      resolve: 'gatsby-plugin-manifest',
-      options: {
-        name: `Docker Pi`,
-        short_name: `Docker Pi`,
-        start_url: '/',
-        background_color: '#524763',
-        theme_color: '#524763',
-        display: 'minimal-ui',
-      },
-    },
-    'gatsby-plugin-offline',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -42,13 +28,20 @@ module.exports = {
         name: 'pages',
       },
     },
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: 'gatsby-plugin-manifest',
       options: {
-        path: `${__dirname}/src/images`,
-        name: 'images',
+        name: `Docker Pi`,
+        short_name: `Docker Pi`,
+        start_url: '/',
+        background_color: '#524763',
+        theme_color: '#524763',
+        display: 'minimal-ui',
       },
     },
+    'gatsby-plugin-offline',
     {
       resolve: `gatsby-plugin-gtag`,
       options: {

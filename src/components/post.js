@@ -21,23 +21,12 @@ export default class postLayout extends Component {
 }
 
 export const query = graphql`
-  query PostQuery {
-    markdownRemark {
+  query PostQuery($slug: String!) {
+    markdownRemark(slug: { eq: $slug }) {
       html
       frontmatter {
         title
-        date
       }
     }
   }
-  # query PostQuery($slug: String!) {
-  #   markdownRemark(frontmatter: { slug: { eq: $slug } }) {
-  #     html
-  #     frontmatter {
-  #       title
-  #       date
-  #       slug
-  #     }
-  #   }
-  # }
 `

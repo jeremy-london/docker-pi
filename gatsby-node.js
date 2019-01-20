@@ -1,13 +1,12 @@
 const path = require('path')
 const { createFilePath } = require('gatsby-source-filesystem')
 
-exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
-  const { createNodeField } = boundActionCreators
+exports.onCreateNode = ({ node, actions, getNode }) => {
+  const { createNodeField } = actions
   if (node.internal.type === `MarkdownRemark`) {
     const slug = createFilePath({
       node,
       getNode,
-      // basePath: `pages`
     })
     createNodeField({
       node,
@@ -17,43 +16,48 @@ exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
   }
 }
 
-// exports.createPages = ({ graphql, actions }) => {
-//   const { createPage } = actions
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions
 
-//   return graphql(`
-//     {
-//       allMarkdownRemark {
-//         edges {
-//           node {
-//             id
-//             fields {
-//               slug
-//             }
-//             frontmatter {
-//               tags
-//               Layout
-//             }
-//           }
-//         }
-//       }
-//     }
-//   `).then(result => {
-//     if (result.errors) {
-//       result.errors.forEach(e => console.error(e.toString()))
-//       return Promise.reject(result.errors)
-//     }
+  return graphql(`
+    {
+      allMarkdownRemark {
+        edges {
+          node {
+            excerpt
+            fields {
+              slug
+            }
+            frontmatter {
+              title
+              tags
+              date
+              description
+              templateKey
+            }
+          }
+        }
+      }
+    }
+  `).then(result => {
+    if (result.errors) {
+      result.errors.forEach(e => console.error(e.toString()))
+      return Promise.reject(result.errors)
+    }
 
-//     const posts = result.data.allMarkdownRemark.edges
+    const posts = result.data.allMarkdownRemark.edges
 
-//     posts.forEach(({ node }) => {
-//       const id = node.id
-//       createPage({
-//         path: `/posts/${node.fields.slug}`,
-//         component: path.resolve('./src/components/postLayout.js'),
-//         context: {
-//           slug: node.fields.slug,
-//         },
-//       })
-//     })
-//   })
-// }
+    posts.forEach(({ node }) => {
+      const slug = node.fields.slug
+      createPage({
+        path: `${node.fields.slug}`,
+        component: path.resolve(
+          `src/components/${String(node.frontmatter.templateKey)}.js`
+        ),
+        context: {
+          slug,
+        },
+      })
+    })
+  })
+}
