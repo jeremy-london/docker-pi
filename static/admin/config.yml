@@ -1,7 +1,7 @@
 backend:
   name: github
   repo: jeremy-london/docker-pi # Change this to your repo
-  branch: testing
+  branch: test
 
 production:
   backend:
