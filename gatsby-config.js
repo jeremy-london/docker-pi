@@ -43,23 +43,14 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: `gatsby-plugin-gtag`,
       options: {
-        trackingId: 'UA-132817533-1',
+        // your google analytics tracking id
+        trackingId: `UA-132817533-1`,
         // Puts tracking script in the head instead of the body
         head: false,
-        // Setting this parameter is optional
+        // enable ip anonymization
         anonymize: true,
-        // Setting this parameter is also optional
-        respectDNT: true,
-        // Avoids sending pageview hits from custom paths
-        exclude: ['/preview/**', '/do-not-track/me/too/'],
-        // Enables Google Optimize using your container Id
-        optimizeId: 'UA-132817533-1',
-        // Any additional create only fields (optional)
-        sampleRate: 5,
-        siteSpeedSampleRate: 10,
-        cookieDomain: 'docker-pi.com/',
       },
     },
     'gatsby-transformer-remark',
