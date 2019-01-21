@@ -5,7 +5,8 @@ import styled from 'styled-components'
 const LISTING_QUERY = graphql`
   query BlogPostListing {
     allMarkdownRemark(
-      limit: 10 # sort: { order: DESC, fields: [frontmatter___date] }
+      limit: 10
+      sort: { order: DESC, fields: [frontmatter___date] }
     ) {
       edges {
         node {
@@ -14,7 +15,7 @@ const LISTING_QUERY = graphql`
             slug
           }
           frontmatter {
-            # date(formatString: "MMMM DD, YYYY")
+            date(formatString: "MMMM DD, YYYY")
             title
           }
         }

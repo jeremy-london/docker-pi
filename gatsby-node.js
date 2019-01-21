@@ -29,10 +29,6 @@ exports.createPages = ({ graphql, actions }) => {
               slug
             }
             frontmatter {
-              title
-              tags
-              date
-              description
               templateKey
             }
           }
@@ -48,14 +44,14 @@ exports.createPages = ({ graphql, actions }) => {
     const posts = result.data.allMarkdownRemark.edges
 
     posts.forEach(({ node }) => {
-      const slug = node.fields.slug
+      const id = node.id
       createPage({
-        path: `${node.fields.slug}`,
+        path: `/posts${node.fields.slug}`,
         component: path.resolve(
           `src/components/${String(node.frontmatter.templateKey)}.js`
         ),
         context: {
-          slug,
+          id,
         },
       })
     })
